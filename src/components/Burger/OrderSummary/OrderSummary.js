@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+//import { Route, Link } from 'react-router-dom';
+
 import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
+//import CheckoutSummary from '../../Order/CheckoutSummary/CheckoutSummary';
 
 
 class OrderSummary extends Component {
