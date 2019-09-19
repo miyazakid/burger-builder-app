@@ -33,6 +33,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
+      console.log(this.props);
       axios.get('https://burger-builder-de22d.firebaseio.com/ingredients.json')
         .then(response => {
             this.setState({ingredients: response.data});
@@ -94,33 +95,36 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-      // alert('You continue!');
-        this.setState({loading: true});
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.price,
-            customer: {
-                name: 'Salmon Knowledge',
-                address: {
-                    street: 'River Street',
-                    zipCode: 'UP5TR34M',
-                    country: 'Ireland'
-                },
-            email: 'salmon@river.com'
-          },
-          deliveryMethod: '1 Day Shipping'
-        }
-        axios.post('/orders.json', order)
-            .then(response => {
-              this.setState({loading: false, purchasing: false});
-            })
-            .catch(error => {
-              this.setState({loading: false, purchasing: false});
-            });
+        
+        this.props.history.push({
+            pathname: '/checkout',
+            search: ''
+        });
+        // this.setState({loading: true});
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.price,
+        //     customer: {
+        //         name: 'Salmon Knowledge',
+        //         address: {
+        //             street: 'River Street',
+        //             zipCode: 'UP5TR34M',
+        //             country: 'Ireland'
+        //         },
+        //     email: 'salmon@river.com'
+        //   },
+        //   deliveryMethod: '1 Day Shipping'
+        // }
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //       this.setState({loading: false, purchasing: false});
+        //     })
+        //     .catch(error => {
+        //       this.setState({loading: false, purchasing: false});
+        //     });
     }
 
     render() {
-      console.log(this.props);
         const disabledInfo = {
             ...this.state.ingredients
         };
