@@ -12,6 +12,10 @@ class Checkout extends Component {
       }
     }
 
+    componentDidMount () {
+        
+    }
+
     checkoutCancelledHandler = () => {
       this.props.history.goBack();
     }
@@ -24,6 +28,7 @@ class Checkout extends Component {
       return (
           <div>
             <CheckoutSummary
+                ingredients
                 checkoutCancelled={this.checkoutCancelledHandler}
                 checkoutContinued={this.checkoutContinuedHandler} />
           </div>
