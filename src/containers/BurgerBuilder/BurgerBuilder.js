@@ -33,7 +33,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
-      
+
       axios.get('https://burger-builder-de22d.firebaseio.com/ingredients.json')
         .then(response => {
             this.setState({ingredients: response.data});
@@ -99,33 +99,12 @@ class BurgerBuilder extends Component {
         for (let i in this.state.ingredients) {
           queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
+        queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
         this.props.history.push({
             pathname: '/checkout',
             search: '?' + queryString
         });
-        // this.setState({loading: true});
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.price,
-        //     customer: {
-        //         name: 'Salmon Knowledge',
-        //         address: {
-        //             street: 'River Street',
-        //             zipCode: 'UP5TR34M',
-        //             country: 'Ireland'
-        //         },
-        //     email: 'salmon@river.com'
-        //   },
-        //   deliveryMethod: '1 Day Shipping'
-        // }
-        // axios.post('/orders.json', order)
-        //     .then(response => {
-        //       this.setState({loading: false, purchasing: false});
-        //     })
-        //     .catch(error => {
-        //       this.setState({loading: false, purchasing: false});
-        //     });
     }
 
     render() {
