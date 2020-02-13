@@ -50,7 +50,7 @@ class ContactData extends Component {
                 value: ''
               },
               deliveryMethod: {
-                elementType: 'input',
+                elementType: 'select',
                 elementConfig: {
                   options: [
                     {value: 'fastest', displayValue: 'Fastest'},
@@ -84,12 +84,24 @@ class ContactData extends Component {
     }
 
     render () {
+      const formElementsArray = [];
+      for (let key in this.state.orderForm) {
+        formElementsArray.push({
+            id: key,
+            config: this.state.orderForm[key]
+        });
+        // console.log(formElementsArray);
+      }
       let form = (
         <form>
-            <Input inputtype="input" type="text" name="name" placeholder="Your name" />
-            <Input inputtype="input" type="text" name="email" placeholder="Your email" />
-            <Input inputtype="input" type="text" name="street" placeholder="Street" />
-            <Input inputtype="input" type="text" name="postal" placeholder="Postal Code" />
+            
+            {formElementsArray.map(e => (
+                <Input
+                  key={e.id}
+                  elementType={e.config.elementType}
+                  elementConfig={e.config.elementConfig}
+                  value={e.config.value}/>
+            ))}
             <Button btnType="Success" clicked={this.orderHandler}>Order</ Button>
         </form>
       );
